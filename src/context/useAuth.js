@@ -50,9 +50,13 @@ import React, { createContext, useCallback, useState, useContext, useEffect, } f
       setData({});
     }, []);
   
+    const updatedUser = useCallback((updatedUser) =>{
+      setData((currentData) => ({ ...currentData, user:updatedUser}));
+      AsyncStorage.setItem("@SenaiX:user", JSON.stringify(updatedUser));
+    }, []);
   
     return (
-      <AuthContext.Provider value={{ ...data, signIn, signOut }}>
+      <AuthContext.Provider value={{ ...data, signIn, signOut, updatedUser }}>
         {children}
       </AuthContext.Provider>
     );
